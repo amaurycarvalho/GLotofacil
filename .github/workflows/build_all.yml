@@ -38,7 +38,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Make
-      run: \lazarus\lazbuild GeraLF.lpi
+      run: C:\lazarus\lazbuild GeraLF.lpi
     - name: Upload artifact (64bits)
       uses: actions/upload-artifact@v3
       with:
