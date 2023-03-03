@@ -56,12 +56,12 @@ jobs:
         version: ${{ steps.get_tag.outputs.VERSION }}
         arch: 'x86_64'
         desc: 'glotofacil package'
-    - name: Packing macos artifact (x86_64)
-      run: |
-          sudo apt-get install genisoimage
-          genisoimage -V glotofacil -D -R -apple -no-pad -o glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg glotofacil-mac-x86_64-bin
-          gzip -k glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg
-          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.zip glotofacil-mac-x86_64-bin/*
+#    - name: Packing macos artifact (x86_64)
+#      run: |
+#          sudo apt-get install genisoimage
+#          genisoimage -V glotofacil -D -R -apple -no-pad -o glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg glotofacil-mac-x86_64-bin
+#          gzip -k glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg
+#          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.zip glotofacil-mac-x86_64-bin/*
     - name: Packing windows artifact (x64)
       run: |
           zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-windows-x64-bin.zip glotofacil-windows-x64-bin/*
