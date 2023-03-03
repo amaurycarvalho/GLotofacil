@@ -26,6 +26,9 @@
 #*.obj
 #
 
+# user defined files
+GLotofacil
+
 # Delphi compiler-generated binaries (safe to delete)
 *.exe
 *.dll
