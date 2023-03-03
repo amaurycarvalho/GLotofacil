@@ -1,0 +1,14 @@
+https://forum.lazarus.freepascal.org/index.php?topic=31147.0
+
+https://servicebus2.caixa.gov.br/portaldeloterias/api/quina
+https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena
+https://servicebus2.caixa.gov.br/portaldeloterias/api/duplasena
+https://servicebus2.caixa.gov.br/portaldeloterias/api/lotofacil
+https://servicebus2.caixa.gov.br/portaldeloterias/api/lotomania
+https://servicebus2.caixa.gov.br/portaldeloterias/api/diadesorte
+https://servicebus2.caixa.gov.br/portaldeloterias/api/timemania
+https://servicebus2.caixa.gov.br/portaldeloterias/api/federal
+https://servicebus2.caixa.gov.br/portaldeloterias/api/loteca
+https://servicebus2.caixa.gov.br/portaldeloterias/api/supersete
+
+

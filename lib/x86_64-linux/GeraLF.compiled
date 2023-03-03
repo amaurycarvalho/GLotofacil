@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="/usr/bin/fpc" Date="1649687632"/>
+  <Params Value=" -MDelphi -Scghi -Cg -O1 -g -gl -l -vewnhibq &quot;-Fi/home/amaury/Documentos/Sources/Lazarus Projects/GLotofacil/lib/x86_64-linux&quot; -Fu/usr/lib/lazarus/2.2.0/lcl/units/x86_64-linux/gtk2 -Fu/usr/lib/lazarus/2.2.0/lcl/units/x86_64-linux -Fu/usr/lib/lazarus/2.2.0/components/freetype/lib/x86_64-linux -Fu/usr/lib/lazarus/2.2.0/components/lazutils/lib/x86_64-linux -Fu/usr/lib/lazarus/2.2.0/packager/units/x86_64-linux &quot;-Fu/home/amaury/Documentos/Sources/Lazarus Projects/GLotofacil/&quot; &quot;-FU/home/amaury/Documentos/Sources/Lazarus Projects/GLotofacil/lib/x86_64-linux/&quot; &quot;-FE/home/amaury/Documentos/Sources/Lazarus Projects/GLotofacil/&quot; &quot;-o/home/amaury/Documentos/Sources/Lazarus Projects/GLotofacil/GLotofacil&quot; -dLCL -dLCLgtk2 -dBorland -dVer150 -dDelphi7 -dCompiler6_Up -dPUREPASCAL GeraLF.lpr"/>
+</CONFIG>

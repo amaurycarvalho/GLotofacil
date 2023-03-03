@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Gerador de Combinações da Lotofacil
+Comment=Gerador de Combinações da Lotofacil
+Exec=/usr/bin/GLotofacil
+Icon=/usr/share/pixmaps/GLotofacil.png
+Terminal=false
+Categories=GTK;GNOME;Game
+
+Name[pt_BR]=Gerador de Combinações da Lotofacil

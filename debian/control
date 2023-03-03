@@ -1,0 +1,12 @@
+Source: glotofacil
+Maintainer: Amaury Carvalho <amauryspires@gmail.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.3
+Build-Depends: fpc, lazarus, lcl, lcl-utils, debhelper (>= 8)
+
+Package: glotofacil
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+Description: Gerenciador de combinações da Lotofacil
+ Gerenciador de combinações da Lotofacil, com recursos de importação dos sorteios, geração de combinações, análises estatísticas básicas e via redes neurais.

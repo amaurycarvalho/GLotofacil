@@ -1,0 +1,54 @@
+GeraLF.lpr Note: Changed encoding from ISO-8859-1 to UTF-8
+GeraLF.lpi Note: Added defines -dBorland -dVer150 -dDelphi7 -dCompiler6_Up -dPUREPASCAL in custom options
+ Progress: Found all unit files
+ : 
+ : *** Converting unit files belonging to project/package ***
+Unit1.pas Note: Changed encoding from ISO-8859-1 to UTF-8
+Unit1.pas Note: Changed encoding from ISO-8859-1 to UTF-8
+Unit1.pas Note: Replaced unit "Windows" with "LCLIntf, LCLType, LMessages" in uses section.
+CSN.pas Note: Changed encoding from ISO-8859-1 to UTF-8
+ : 
+ : *** Fixing used units and Repairing form files ***
+Unit1.pas Note: Removed property "TextHeight".
+Unit1.pas Note: Removed property "OldCreateOrder".
+Unit1.pas Note: Removed property "Icon.Data".
+Unit1.pas Note: Changed Top coord of TMemo from "201" to "199" inside TPanel.
+Unit1.pas Note: Changed Left coord of TMemo from "1" to "0" inside TPanel.
+Unit1.pas Note: Changed Top coord of TProgressBar from "112" to "98" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TProgressBar from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TProgressBar from "88" to "74" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TProgressBar from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TEdit from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TEdit from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TButton from "40" to "26" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TButton from "104" to "102" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TButton from "40" to "26" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TButton from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TGroupBox from "1" to "0" inside TPanel.
+Unit1.pas Note: Changed Left coord of TGroupBox from "1" to "0" inside TPanel.
+Unit1.pas Note: Changed Top coord of TCheckBox from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TCheckBox from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TGroupBox from "137" to "135" inside TPanel.
+Unit1.pas Note: Changed Left coord of TGroupBox from "1" to "0" inside TPanel.
+Unit1.pas Note: Changed Top coord of TRadioButton from "20" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TRadioButton from "88" to "86" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TRadioButton from "20" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TRadioButton from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TGroupBox from "1" to "0" inside TPanel.
+Unit1.pas Note: Changed Left coord of TGroupBox from "553" to "551" inside TPanel.
+Unit1.pas Note: Changed Top coord of TButton from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TButton from "496" to "494" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TButton from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TButton from "368" to "366" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TButton from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TButton from "264" to "262" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TButton from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TButton from "232" to "230" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TEdit from "16" to "2" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TEdit from "152" to "150" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TLabel from "19" to "5" inside TGroupBox.
+Unit1.pas Note: Changed Left coord of TLabel from "8" to "6" inside TGroupBox.
+Unit1.pas Note: Changed Top coord of TGroupBox from "1" to "0" inside TPanel.
+Unit1.pas Note: Changed Left coord of TGroupBox from "1" to "0" inside TPanel.
+ Progress: Conversion took: 00:00:02
+ : Conversion Ready.

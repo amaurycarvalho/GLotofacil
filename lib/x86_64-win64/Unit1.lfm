@@ -1,0 +1,437 @@
+object Form1: TForm1
+  Left = 194
+  Height = 502
+  Top = 116
+  Width = 918
+  Caption = 'Gerador de combinações Lotofácil'
+  ClientHeight = 478
+  ClientWidth = 918
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '1.8.2.0'
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 18
+    Top = 460
+    Width = 918
+    Panels = <>
+    SimpleText = 'Ready'
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 460
+    Top = 0
+    Width = 918
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Sorteios'
+      ClientHeight = 432
+      ClientWidth = 908
+      object Bevel1: TBevel
+        Left = 0
+        Height = 432
+        Top = 0
+        Width = 168
+        Align = alLeft
+      end
+      object Button2: TButton
+        Left = 8
+        Height = 39
+        Top = 8
+        Width = 152
+        Caption = 'Importar da Internet'
+        OnClick = Button2Click
+        TabOrder = 0
+      end
+      object Button4: TButton
+        Left = 8
+        Height = 44
+        Top = 56
+        Width = 150
+        Caption = 'Importar de arquivo'
+        OnClick = Button4Click
+        TabOrder = 1
+      end
+      object Button5: TButton
+        Left = 8
+        Height = 40
+        Top = 112
+        Width = 150
+        Caption = 'Copiar sorteios'
+        OnClick = Button5Click
+        TabOrder = 2
+      end
+      object StringGrid1: TStringGrid
+        Left = 168
+        Height = 432
+        Top = 0
+        Width = 740
+        Align = alClient
+        TabOrder = 3
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+      end
+      object Button6: TButton
+        Left = 8
+        Height = 42
+        Top = 165
+        Width = 150
+        Caption = 'Refresh'
+        OnClick = Button6Click
+        TabOrder = 4
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Apostas'
+      ClientHeight = 432
+      ClientWidth = 908
+      object GroupBox5: TGroupBox
+        Left = 0
+        Height = 47
+        Top = 0
+        Width = 908
+        Align = alTop
+        Caption = 'Sorteio da Caixa Econômica Federal'
+        ClientHeight = 32
+        ClientWidth = 906
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 6
+          Height = 14
+          Hint = 'Clique aqui para o sistema escolher uma combinação aleatoriamente.'
+          Top = 5
+          Width = 163
+          Caption = 'Combinação sorteada (CSN):'
+          ParentColor = False
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = Label1Click
+        end
+        object Edit1: TEdit
+          Left = 176
+          Height = 26
+          Hint = 'Combinação sorteada pela Caixa'
+          Top = 0
+          Width = 81
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          Text = '1'
+        end
+        object Button1: TButton
+          Left = 272
+          Height = 20
+          Hint = 'Calcula o número sequencial combinatório de uma combinação'
+          Top = 2
+          Width = 25
+          Caption = '...'
+          OnClick = Button1Click
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+        end
+        object btnScore: TButton
+          Left = 312
+          Height = 20
+          Hint = 'Verificar score da combinação sorteada dentro do grupo.'
+          Top = 2
+          Width = 138
+          Caption = 'Recalcular &score'
+          OnClick = btnScoreClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+        end
+        object btnCobertura: TButton
+          Left = 464
+          Height = 20
+          Hint = 'Calcular propagação'
+          Top = 2
+          Width = 121
+          Caption = '&Calcular cobertura'
+          OnClick = btnCoberturaClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+        end
+        object btnResumo: TButton
+          Left = 600
+          Height = 20
+          Hint = 'Exibe resumo do score.'
+          Top = 2
+          Width = 80
+          Caption = '&Resumo'
+          OnClick = btnResumoClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 4
+        end
+      end
+      object Panel2: TPanel
+        Left = 729
+        Height = 385
+        Top = 47
+        Width = 179
+        Align = alRight
+        ClientHeight = 385
+        ClientWidth = 179
+        TabOrder = 1
+        OnClick = Panel2Click
+        object GroupBox2: TGroupBox
+          Left = 1
+          Height = 64
+          Top = 137
+          Width = 177
+          Align = alTop
+          Caption = '&Opções'
+          ClientHeight = 49
+          ClientWidth = 175
+          TabOrder = 1
+          object opOtimizaProp: TCheckBox
+            Left = 6
+            Height = 23
+            Hint = 'Otimizar o grupo de combinações fazendo-o cobrir uma maior área do universo de combinações possíveis.'
+            Top = 2
+            Width = 129
+            Caption = 'Minimizar colisão'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+          end
+        end
+        object GroupBox3: TGroupBox
+          Left = 1
+          Height = 136
+          Top = 1
+          Width = 177
+          Align = alTop
+          Caption = '&Combinações a gerar'
+          ClientHeight = 121
+          ClientWidth = 175
+          TabOrder = 0
+          object btnGerar: TButton
+            Left = 6
+            Height = 33
+            Hint = 'Gerar combinações'
+            Top = 34
+            Width = 89
+            Caption = '&Gerar'
+            OnClick = btnGerarClick
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+          end
+          object Button3: TButton
+            Left = 102
+            Height = 33
+            Hint = 'Parar geração das combinações'
+            Top = 34
+            Width = 65
+            Caption = '&Parar'
+            Enabled = False
+            OnClick = Button3Click
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+          end
+          object Edit2: TEdit
+            Left = 6
+            Height = 26
+            Hint = 'Número de combinações a gerar no grupo'
+            Top = 2
+            Width = 161
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            Text = '20'
+          end
+          object pb1: TProgressBar
+            Left = 6
+            Height = 17
+            Top = 74
+            Width = 161
+            TabOrder = 3
+          end
+          object pb2: TProgressBar
+            Left = 6
+            Height = 17
+            Top = 98
+            Width = 161
+            TabOrder = 4
+          end
+        end
+        object Memo1: TMemo
+          Left = 1
+          Height = 183
+          Top = 201
+          Width = 177
+          Align = alClient
+          Lines.Strings = (
+            'INFORMAÇÕES'
+            ''
+            'CSN, do inglês Combinatoric '
+            'Sequential Number, ou '
+            'Número Sequencial '
+            'Combinatório, é o número da '
+            'combinação dentro do '
+            'universo de combinações '
+            'possíveis na loteria.'
+            ''
+            'A coluna colisão demonstra '
+            'quantas dezenas da '
+            'combinação corrente se repetem '
+            'nas combinações antecessoras.'
+            ''
+            'Use a opção de minimizar a '
+            'colisão para que o grupo de '
+            'combinações cubra uma maior '
+            'área do universo de '
+            'combinações possíveis '
+            '(cobertura), '
+            'aumentando assim as '
+            'probabilidades de ganho do '
+            'grupo em cada sorteio. '
+            ''
+            'A opção de minimizar colisão '
+            'tenta evitar que duas '
+            'combinações tenham suas '
+            'dezenas semelhantes entre si, '
+            'tornando-se assim '
+            'inconvenientemente uma aposta '
+            'quase repetida.'
+            ''
+            'Quando a colisão é minimizada, '
+            'uma dada '
+            'combinação do grupo tem baixa '
+            'probabilidade de ter suas '
+            'dezenas repetidas em uma outra '
+            'combinação do mesmo grupo de '
+            'aposta.'
+            ''
+            'O percentual de cobertura '
+            'refere-se a quantas '
+            'combinações do universo '
+            'possível pagariam premio para '
+            'as combinações do grupo '
+            'gerado.'
+          )
+          ParentColor = True
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 2
+        end
+      end
+      object sg1: TStringGrid
+        Left = 0
+        Height = 385
+        Hint = 'Clique com o botão direito para mais opções.'
+        Top = 47
+        Width = 729
+        Align = alClient
+        ColCount = 6
+        DefaultRowHeight = 18
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
+        ParentShowHint = False
+        PopupMenu = PopupMenu1
+        ShowHint = True
+        TabOrder = 2
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 328
+    top = 192
+    object Copy1: TMenuItem
+      Caption = 'Copiar'
+      OnClick = Copy1Click
+    end
+    object Colar1: TMenuItem
+      Caption = 'Colar'
+      OnClick = Colar1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Adicionar1: TMenuItem
+      Caption = 'Adicionar'
+      OnClick = Adicionar1Click
+    end
+    object Remover1: TMenuItem
+      Caption = 'Remover'
+      OnClick = Remover1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object OrdenarpeloScore1: TMenuItem
+      Caption = 'Ordenar pelo Score'
+      OnClick = OrdenarpeloScore1Click
+    end
+    object ContarScores1: TMenuItem
+      Caption = 'Contar Scores'
+      OnClick = ContarScores1Click
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.*.lf'
+    Filter = 'Grupos de combinações Lotofácil|*.lf'
+    left = 216
+    top = 192
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.*.lf'
+    Filter = 'Grupos de combinações Lotofácil|*.lf'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    left = 248
+    top = 192
+  end
+  object MainMenu1: TMainMenu
+    left = 296
+    top = 192
+    object Arquivo1: TMenuItem
+      Caption = '&Arquivo'
+      object Novo1: TMenuItem
+        Caption = 'Novo'
+        ShortCut = 16462
+        OnClick = Novo1Click
+      end
+      object Abrir1: TMenuItem
+        Caption = 'Abrir'
+        ShortCut = 16463
+        OnClick = Abrir1Click
+      end
+      object Salvar1: TMenuItem
+        Caption = 'Salvar'
+        ShortCut = 16467
+        OnClick = Salvar1Click
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object Sair1: TMenuItem
+        Caption = 'Sair'
+        OnClick = Sair1Click
+      end
+    end
+    object Ajuda1: TMenuItem
+      Caption = 'Ajuda'
+      object Sobre1: TMenuItem
+        Caption = 'Sobre'
+        OnClick = Sobre1Click
+      end
+    end
+  end
+end
