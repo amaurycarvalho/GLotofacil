@@ -46,19 +46,19 @@ jobs:
         path: GLotofacil.exe
         
 
-  build-mac-x86_64:
-    runs-on: macos-latest
-    steps:
-    - name: Install FPC
-      run: |
-           brew update
-           brew install lazarus
-    - name: Checkout
-      uses: actions/checkout@v2.0.0
-    - name: Make
-      run: /Applications/Lazarus/lazbuild --ws=cocoa GeraLF.lpi
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: glotofacil-mac-x86_64-bin
-        path: GLotofacil*        
+#  build-mac-x86_64:
+#    runs-on: macos-latest
+#    steps:
+#    - name: Install FPC
+#      run: |
+#           brew update
+#           brew install lazarus
+#    - name: Checkout
+#      uses: actions/checkout@v2.0.0
+#    - name: Make
+#      run: /Applications/Lazarus/lazbuild --ws=cocoa GeraLF.lpi
+#    - name: Upload artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: glotofacil-mac-x86_64-bin
+#        path: GLotofacil*        
