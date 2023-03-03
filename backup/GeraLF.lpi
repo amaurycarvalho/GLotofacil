@@ -21,7 +21,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <RevisionNr Value="2"/>
-      <StringTable CompanyName="Amaury Carvalho Softwares" ProductName="Gerador de lotofácil" ProductVersion="1.0.2.0"/>
+      <StringTable CompanyName="Amaury Carvalho Softwares" ProductName="Gerador de combinações da Lotofácil" ProductVersion="1.0.2.0"/>
     </VersionInfo>
     <BuildModes Count="2">
       <Item1 Name="Linux64" Default="True"/>
