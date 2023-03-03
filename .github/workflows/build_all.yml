@@ -18,13 +18,11 @@ jobs:
       run: |
            export DEBIAN_FRONTEND=noninteractive
            sudo apt-get update
-           sudo apt-get install -y fpc    
+           sudo apt-get install -y lazarus    
     - name: Checkout
       uses: actions/checkout@v2.0.0
     - name: Make
-      uses: suve/GHActions-FPC@v0.4.0
-      with:
-        source: GeraLF.lpi
+      run: lazbuild GeraLF.lpi
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
@@ -40,11 +38,27 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Make
-      uses: suve/GHActions-FPC@v0.4.0
-      with:
-        source: GeraLF.lpi
+      run: lazbuild GeraLF.lpi
     - name: Upload artifact (64bits)
       uses: actions/upload-artifact@v3
       with:
         name: glotofacil-windows-x64-bin
         path: GLotofacil.exe
+        
+
+  build-mac-x86_64:
+    runs-on: macos-latest
+    steps:
+    - name: Install FPC
+      run: |
+           brew update
+           brew install lazarus
+    - name: Checkout
+      uses: actions/checkout@v2.0.0
+    - name: Make
+      run: lazbuild GeraLF.lpi
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: glotofacil-mac-x86_64-bin
+        path: GLotofacil*        
