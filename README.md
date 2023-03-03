@@ -1,0 +1,2 @@
+# GLotofacil
+Gerador de Lotofácil
