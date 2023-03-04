@@ -39,8 +39,8 @@ jobs:
     - name: Install Lazarus (FPC)
       uses: gcarreno/setup-lazarus@v3.2
       with:
-        lazarus-version: "stable"
-        with-cache: true    
+        lazarus-version: "dist"
+        with-cache: false    
 #      run: |
 #           choco install lazarus
     - name: Checkout
