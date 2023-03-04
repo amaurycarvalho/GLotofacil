@@ -64,7 +64,8 @@ jobs:
 #          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.zip glotofacil-mac-x86_64-bin/*
     - name: Packing windows artifact (x64)
       run: |
-          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-windows-x64-bin.zip glotofacil-windows-x64-bin/*
+          unzip -j -o ssl.zip
+          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-windows-x64-bin.zip glotofacil-windows-x64-bin/* libeay32.dll ssleay32.dll
     - name: Create release
       uses: actions/create-release@v1
       id: create_release
