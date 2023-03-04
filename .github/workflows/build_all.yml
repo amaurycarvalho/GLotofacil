@@ -40,7 +40,7 @@ jobs:
       uses: gcarreno/setup-lazarus@v3.2
       with:
         lazarus-version: "stable"
-        with-cache: false    
+        with-cache: true    
 #      run: |
 #           choco install lazarus
     - name: Checkout
