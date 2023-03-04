@@ -5,11 +5,11 @@ Gerenciador de combinações da Lotofácil, com recursos de importação dos sor
 
 ## Windows (64 bits)
 
-Disponível na seção de downloads.
+Disponível na seção de releases.
 
 ## Linux (64 bits)
 
-Pode ser instalada via os comandos abaixo:
+Disponível na seção de releases, ou via PPA através dos comandos abaixo:
 
     sudo add-apt-repository ppa:amaurycarvalho/glotofacil
     sudo apt-get update
