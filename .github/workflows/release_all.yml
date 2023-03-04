@@ -56,12 +56,12 @@ jobs:
 #        version: ${{ steps.get_tag.outputs.VERSION }}
 #        arch: 'x86_64'
 #        desc: 'glotofacil package'
-#    - name: Packing macos artifact (x86_64)
-#      run: |
-#          sudo apt-get install genisoimage
-#          genisoimage -V glotofacil -D -R -apple -no-pad -o glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg glotofacil-mac-x86_64-bin
-#          gzip -k glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg
-#          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.zip glotofacil-mac-x86_64-bin/*
+    - name: Packing macos artifact (x86_64)
+      run: |
+          sudo apt-get install genisoimage
+          genisoimage -V glotofacil -D -R -apple -no-pad -o glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg glotofacil-mac-x86_64-bin
+          gzip -k glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.dmg
+          zip --junk-paths glotofacil-${{ steps.get_tag.outputs.VERSION }}-mac-x86_64-bin.zip glotofacil-mac-x86_64-bin/*
     - name: Packing windows artifact (x64)
       run: |
           unzip -j -o ssl.zip
@@ -82,5 +82,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        asset_paths: '["glotofacil*.deb", "glotofacil*-linux-*.tar.gz", "glotofacil*-windows-*.zip"]'
-# "glotofacil?[0-9]*.rpm", "glotofacil*-mac-*.*",
+        asset_paths: '["glotofacil*.deb", "glotofacil*-linux-*.tar.gz", "glotofacil*-mac-*.*", "glotofacil*-windows-*.zip"]'
+# "glotofacil?[0-9]*.rpm", 
