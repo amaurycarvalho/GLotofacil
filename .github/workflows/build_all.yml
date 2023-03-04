@@ -14,11 +14,15 @@ jobs:
   build-linux-x64:
     runs-on: ubuntu-latest
     steps:
-    - name: Install FPC
-      run: |
-           export DEBIAN_FRONTEND=noninteractive
-           sudo apt-get update
-           sudo apt-get install -y lazarus    
+    - name: Install Lazarus (FPC)
+      uses: gcarreno/setup-lazarus@v3.2
+      with:
+        lazarus-version: "stable"
+        with-cache: true    
+#      run: |
+#           export DEBIAN_FRONTEND=noninteractive
+#           sudo apt-get update
+#           sudo apt-get install -y lazarus    
     - name: Checkout
       uses: actions/checkout@v2.0.0
     - name: Make
@@ -32,33 +36,42 @@ jobs:
   build-windows-x64:
     runs-on: windows-latest
     steps:
-    - name: Install FPC
-      run: |
-           choco install lazarus
+    - name: Install Lazarus (FPC)
+      uses: gcarreno/setup-lazarus@v3.2
+      with:
+        lazarus-version: "stable"
+        with-cache: true    
+#      run: |
+#           choco install lazarus
     - name: Checkout
       uses: actions/checkout@v2
     - name: Make
-      run: C:\lazarus\lazbuild GeraLF.lpi
+      run: lazbuild GeraLF.lpi
+#      run: C:\lazarus\lazbuild GeraLF.lpi
     - name: Upload artifact (64bits)
       uses: actions/upload-artifact@v3
       with:
         name: glotofacil-windows-x64-bin
-        path: GLotofacil.exe
-        
+        path: GLotofacil.exe        
 
-#  build-mac-x86_64:
-#    runs-on: macos-latest
-#    steps:
-#    - name: Install FPC
+  build-mac-x86_64:
+    runs-on: macos-latest
+    steps:
+    - name: Install Lazarus (FPC)
+      uses: gcarreno/setup-lazarus@v3.2
+      with:
+        lazarus-version: "stable"
+        with-cache: true    
 #      run: |
 #           brew update
 #           brew install lazarus
-#    - name: Checkout
-#      uses: actions/checkout@v2.0.0
-#    - name: Make
+    - name: Checkout
+      uses: actions/checkout@v2.0.0
+    - name: Make
+      run: lazbuild --ws=cocoa GeraLF.lpi
 #      run: /Applications/Lazarus/lazbuild --ws=cocoa GeraLF.lpi
-#    - name: Upload artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: glotofacil-mac-x86_64-bin
-#        path: GLotofacil*        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: glotofacil-mac-x86_64-bin
+        path: GLotofacil*        
