@@ -62,6 +62,7 @@ type
     ballot_bets_total: array [0..4] of integer;
     ballot_bets_skip_last: boolean;
     has_data: boolean;
+    stop: boolean;
 
     chart_data: array of array of double;
     chart_count: integer;
@@ -150,6 +151,8 @@ var
   lastLocalNumber, currNumber, lastRemoteNumber: integer;
 begin
 
+  stop := false;
+
   sb.SimpleText := 'Conectando ao portal da Caixa Economica Federal...';
   Application.ProcessMessages;
 
@@ -227,6 +230,8 @@ begin
               oJson.dezenasSorteadasOrdemSorteio;
             sCSV.Add(sNewLine);
             Application.ProcessMessages;
+            if stop then
+               break;
           end;
 
           if FileExists(sFileData) then

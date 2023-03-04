@@ -62,6 +62,7 @@ type
     ballot_bets_total: array [0..4] of integer;
     ballot_bets_skip_last: boolean;
     has_data: boolean;
+    stop: boolean;
 
     chart_data: array of array of double;
     chart_count: integer;
@@ -73,7 +74,7 @@ type
 
     constructor Create;
 
-    function ImportFromInternet(sb:TStatusBar): boolean;
+    function ImportFromInternet(sb: TStatusBar): boolean;
     function ImportFromInternetFile(): boolean;
     function ImportFromLocalFile(sFile: string): boolean;
     function RefreshGrid(sgGrid: TStringGrid): boolean;
@@ -139,7 +140,7 @@ begin
 
 end;
 
-function TLotoModel.ImportFromInternet(sb:TStatusBar): boolean;
+function TLotoModel.ImportFromInternet(sb: TStatusBar): boolean;
 var
   sUrl, sResult, sCurrNumber, sRemoteNumber, sNewLine: string;
   oHttp: TFPHttpClient;
@@ -149,6 +150,8 @@ var
   sCSV, sLine: TStringList;
   lastLocalNumber, currNumber, lastRemoteNumber: integer;
 begin
+
+  stop := false;
 
   sb.SimpleText := 'Conectando ao portal da Caixa Economica Federal...';
   Application.ProcessMessages;
@@ -168,86 +171,88 @@ begin
       sResult := oHttp.SimpleGet(sUrl);
 
       try
-      oJson := TJsonLF.Create(sResult);
-
-      if not oJson.tipoJogo.Equals('LOTOFACIL') then
-      begin
-        errorMessage := 'Erro na leitura dos concursos (retorno inválido)';
-        Result := False;
-        exit;
-      end;
-
-      sb.SimpleText := 'Conexão com sucesso';
-      Application.ProcessMessages;
-
-      sRemoteNumber := oJson.numero;
-      lastRemoteNumber := StrToInt(oJson.numero);
-
-      try
-      sCSV := TStringList.Create;
-      sCSV.Delimiter := ';';
-
-      lastLocalNumber := 0;
-
-      if FileExists(sFileData) then
-      begin
-        sCSV.LoadFromFile(sFileData);
-        try
-        sLine := TStringList.Create;
-        sLine.Delimiter := ';';
-        sLine.DelimitedText := sCSV.Strings[sCSV.Count - 1];
-        lastLocalNumber := StrToInt(sLine.Strings[0]);
-        finally
-          sLine.Free;
-        end;
-      end;
-
-      if lastLocalNumber >= lastRemoteNumber then
-      begin
-        errorMessage := 'Não há sorteios novos a importar';
-        Result := False;
-        exit;
-      end;
-
-      for currNumber := lastLocalNumber + 1 to lastRemoteNumber do
-      begin
-        sCurrNumber := IntToStr(currNumber);
-        sb.SimpleText := 'Baixando sorteio: ' + sCurrNumber + '/' + sRemoteNumber;
-        Application.ProcessMessages;
-
-        sResult := oHttp.SimpleGet(sUrl + '/' + sCurrNumber);
         oJson := TJsonLF.Create(sResult);
+
         if not oJson.tipoJogo.Equals('LOTOFACIL') then
         begin
-          errorMessage := 'Erro na leitura do sorteio número: ' + sCurrNumber;
+          errorMessage := 'Erro na leitura dos concursos (retorno inválido)';
           Result := False;
           exit;
         end;
-        sNewLine := sCurrNumber + ';' + oJson.dataApuracao + ';' +
-          oJson.dezenasSorteadasOrdemSorteio;
-        sCSV.Add(sNewLine);
+
+        sb.SimpleText := 'Conexão com sucesso';
         Application.ProcessMessages;
+
+        sRemoteNumber := oJson.numero;
+        lastRemoteNumber := StrToInt(oJson.numero);
+
+        try
+          sCSV := TStringList.Create;
+          sCSV.Delimiter := ';';
+
+          lastLocalNumber := 0;
+
+          if FileExists(sFileData) then
+          begin
+            sCSV.LoadFromFile(sFileData);
+            try
+              sLine := TStringList.Create;
+              sLine.Delimiter := ';';
+              sLine.DelimitedText := sCSV.Strings[sCSV.Count - 1];
+              lastLocalNumber := StrToInt(sLine.Strings[0]);
+            finally
+              sLine.Free;
+            end;
+          end;
+
+          if lastLocalNumber >= lastRemoteNumber then
+          begin
+            errorMessage := 'Não há sorteios novos a importar';
+            Result := False;
+            exit;
+          end;
+
+          for currNumber := lastLocalNumber + 1 to lastRemoteNumber do
+          begin
+            sCurrNumber := IntToStr(currNumber);
+            sb.SimpleText := 'Baixando sorteio: ' + sCurrNumber + '/' + sRemoteNumber;
+            Application.ProcessMessages;
+
+            sResult := oHttp.SimpleGet(sUrl + '/' + sCurrNumber);
+            oJson := TJsonLF.Create(sResult);
+            if not oJson.tipoJogo.Equals('LOTOFACIL') then
+            begin
+              errorMessage := 'Erro na leitura do sorteio número: ' + sCurrNumber;
+              Result := False;
+              exit;
+            end;
+            sNewLine := sCurrNumber + ';' + oJson.dataApuracao + ';' +
+              oJson.dezenasSorteadasOrdemSorteio;
+            sCSV.Add(sNewLine);
+            Application.ProcessMessages;
+            if stop then
+               exit;
+          end;
+
+          if FileExists(sFileData) then
+            DeleteFile(sFileData);
+
+          sCSV.SaveToFile(sFileData);
+
+          Result := True;
+
+        finally
+          sCSV.Free;
+        end;
+
+      except
+        on E: Exception do
+        begin
+          errorMessage := 'Erro na tentativa de download direto: ' +
+            sLineBreak + E.Message;
+          Result := False;
+        end;
       end;
-
-      if FileExists(sFileData) then
-         DeleteFile(sFileData);
-
-      sCSV.SaveToFile(sFileData);
-
-      Result := True;
-
-      finally
-        sCSV.Free;
-      end;
-
-    except
-      on E: Exception do
-      begin
-        errorMessage := 'Erro na tentativa de download direto: ' +
-          sLineBreak + E.Message;
-        Result := False;
-      end;
-    end;
 
     finally
       oJson.Free;

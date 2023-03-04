@@ -26,6 +26,7 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    Button7: TButton;
     Edit1: TEdit;
     Edit2: TEdit;
     GroupBox2: TGroupBox;
@@ -65,6 +66,7 @@ type
     TabSheet2: TTabSheet;
     procedure Button2Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -186,6 +188,7 @@ begin
   Button4.Enabled := False;
   Button5.Enabled := False;
   Button6.Enabled := False;
+  Button7.Visible := True;
   Arquivo1.Enabled := False;
   Ajuda1.Enabled := False;
   TabSheet2.Enabled := False;
@@ -211,7 +214,7 @@ begin
   begin
     ShowMessage(oModel.errorMessage);
     StatusBar1.SimpleText :=
-      'Tente importar novamente daqui a algum tempo';
+      'Tente importar novamente depois de algum tempo';
   end;
 
   Button2.Enabled := True;
@@ -236,6 +239,12 @@ begin
   else
     Edit1.Text := StringGrid1.Cells[17, StringGrid1.RowCount - 1];
 
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+  oModel.stop := true;
+  Button7.Visible := false;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
