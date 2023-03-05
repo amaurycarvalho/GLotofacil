@@ -77,7 +77,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="12">
+    <Units Count="11">
       <Unit0>
         <Filename Value="GeraLF.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -127,11 +127,6 @@
         <Filename Value="ubyteprediction.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
-      <Unit11>
-        <Filename Value="jsoncomponent.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="JsonComponent"/>
-      </Unit11>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

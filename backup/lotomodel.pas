@@ -11,7 +11,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls,
   Graphics, Dialogs, ComCtrls, Menus, Grids, ExtCtrls, StdCtrls, MaskEdit,
   Process, LotoIni, CSN, Clipbrd, LCLIntf, fphttpclient, Zipper,
-  sax_html, dom_html, dom, fpjson, jsonparser, opensslsockets;
+  sax_html, dom_html, dom, fpjson, jsonparser; //, opensslsockets;
 
 type
   TJsonLF = class(TObject)
@@ -231,7 +231,7 @@ begin
             sCSV.Add(sNewLine);
             Application.ProcessMessages;
             if stop then
-               exit;
+               break;
           end;
 
           if FileExists(sFileData) then
