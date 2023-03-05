@@ -82,5 +82,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        asset_paths: '["glotofacil*.deb", "glotofacil*-linux-*.tar.gz", "glotofacil*-mac-*.*", "glotofacil*-windows-*.zip"]'
-# "glotofacil?[0-9]*.rpm", 
+        asset_paths: '["glotofacil*.deb", "glotofacil?[0-9]*.rpm", "glotofacil*-linux-*.tar.gz", "glotofacil*-mac-*.*", "glotofacil*-windows-*.zip"]'
+#  
