@@ -1,0 +1,14 @@
+ORIGINAL:
+
+# bzr-builder format 0.3 deb-version {debupstream}-0~{revno}
+lp:glotofacil
+nest packaging lp:glotofacil debian
+
+---------------
+FINAL:
+
+# git-build-recipe format 0.4 deb-version {debupstream}-0~{revtime}
+lp:glotofacil main
+nest packaging lp:glotofacil debian2
+
+
