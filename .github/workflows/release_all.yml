@@ -45,17 +45,17 @@ jobs:
         arch: 'amd64'
         depends: 'debhelper (>= 8)'
         desc: 'glotofacil package'
-#    - name: Packing linux artifact (x64) - .rpm
-#      id: pack_rpm
-#      uses: jiro4989/build-rpm-action@v2
-#      with:
-#        summary: 'glotofacil package'
-#        package: glotofacil
-#        package_root: .rpmpkg
-#        maintainer: amauryspires@gmail.com
-#        version: ${{ steps.get_tag.outputs.VERSION }}
-#        arch: 'x86_64'
-#        desc: 'glotofacil package'
+    - name: Packing linux artifact (x64) - .rpm
+      id: pack_rpm
+      uses: jiro4989/build-rpm-action@v2
+      with:
+        summary: 'glotofacil package'
+        package: glotofacil
+        package_root: .rpmpkg
+        maintainer: amauryspires@gmail.com
+        version: ${{ steps.get_tag.outputs.VERSION }}
+        arch: 'x86_64'
+        desc: 'glotofacil package'
     - name: Packing macos artifact (x86_64)
       run: |
           sudo apt-get install genisoimage
