@@ -149,9 +149,11 @@ var
   sFileData: string;
   sCSV, sLine: TStringList;
   lastLocalNumber, currNumber, lastRemoteNumber: integer;
+  downloadCount: integer;
 begin
 
-  stop := false;
+  stop := False;
+  downloadCount := 0;
 
   sb.SimpleText := 'Conectando ao portal da Caixa Economica Federal...';
   Application.ProcessMessages;
@@ -164,6 +166,7 @@ begin
   oHttp := TFPHttpClient.Create(nil);
 
   try
+
     try
 
       oHttp.AllowRedirect := True;
@@ -186,6 +189,11 @@ begin
         sRemoteNumber := oJson.numero;
         lastRemoteNumber := StrToInt(oJson.numero);
 
+      finally
+        oJson.Free;
+      end;
+
+      try
         try
           sCSV := TStringList.Create;
           sCSV.Delimiter := ';';
@@ -219,19 +227,26 @@ begin
             Application.ProcessMessages;
 
             sResult := oHttp.SimpleGet(sUrl + '/' + sCurrNumber);
-            oJson := TJsonLF.Create(sResult);
-            if not oJson.tipoJogo.Equals('LOTOFACIL') then
-            begin
-              errorMessage := 'Erro na leitura do sorteio número: ' + sCurrNumber;
-              Result := False;
-              exit;
+
+            try
+              oJson := TJsonLF.Create(sResult);
+              if not oJson.tipoJogo.Equals('LOTOFACIL') then
+              begin
+                errorMessage := 'Erro na leitura do sorteio número: ' + sCurrNumber;
+                Result := False;
+                exit;
+              end;
+              sNewLine := sCurrNumber + ';' + oJson.dataApuracao + ';' +
+                oJson.dezenasSorteadasOrdemSorteio;
+              sCSV.Add(sNewLine);
+              downloadCount += 1;
+            finally
+              oJson.Free;
             end;
-            sNewLine := sCurrNumber + ';' + oJson.dataApuracao + ';' +
-              oJson.dezenasSorteadasOrdemSorteio;
-            sCSV.Add(sNewLine);
+
             Application.ProcessMessages;
             if stop then
-               break;
+              break;
           end;
 
           if FileExists(sFileData) then
@@ -241,22 +256,35 @@ begin
 
           Result := True;
 
-        finally
-          sCSV.Free;
+        except
+          on E: Exception do
+          begin
+            if (downloadCount > 0) then
+            begin
+              if FileExists(sFileData) then
+                DeleteFile(sFileData);
+
+              sCSV.SaveToFile(sFileData);
+            end;
+            errorMessage := 'Erro na tentativa de download direto: ' +
+              sLineBreak + E.Message;
+            Result := False;
+          end;
         end;
 
-      except
-        on E: Exception do
-        begin
-          errorMessage := 'Erro na tentativa de download direto: ' +
-            sLineBreak + E.Message;
-          Result := False;
-        end;
+      finally
+        sCSV.Free;
       end;
 
-    finally
-      oJson.Free;
+    except
+      on E: Exception do
+      begin
+        errorMessage := 'Erro na tentativa de download direto: ' +
+          sLineBreak + E.Message;
+        Result := False;
+      end;
     end;
+
   finally
     oIni.Free;
     oHttp.Free;

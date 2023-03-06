@@ -213,6 +213,7 @@ begin
   else
   begin
     ShowMessage(oModel.errorMessage);
+    Button6.Click;
     StatusBar1.SimpleText :=
       'Tente importar novamente depois de algum tempo';
   end;
@@ -235,7 +236,7 @@ begin
   begin
     //ShowMessage(oModel.errorMessage);
     StatusBar1.SimpleText :=
-      'Faça a importação dos sorteios via o menu ferramentas';
+      'Carregue os sorteios via o botão de importação';
   end
   else
     Edit1.Text := StringGrid1.Cells[17, StringGrid1.RowCount - 1];

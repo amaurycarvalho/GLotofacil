@@ -221,6 +221,7 @@ begin
   Button4.Enabled := True;
   Button5.Enabled := True;
   Button6.Enabled := True;
+  Button7.Visible := False;
   Arquivo1.Enabled := True;
   Ajuda1.Enabled := True;
   TabSheet2.Enabled := True;
@@ -234,7 +235,7 @@ begin
   begin
     //ShowMessage(oModel.errorMessage);
     StatusBar1.SimpleText :=
-      'Faça a importação dos sorteios via o menu ferramentas';
+      'Carregue os sorteios via o botão de importação';
   end
   else
     Edit1.Text := StringGrid1.Cells[17, StringGrid1.RowCount - 1];
