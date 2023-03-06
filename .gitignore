@@ -27,6 +27,7 @@
 #
 
 # user defined files
+build.sh
 GLotofacil
 
 # Delphi compiler-generated binaries (safe to delete)

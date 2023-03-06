@@ -11,4 +11,7 @@ FINAL:
 lp:glotofacil main
 nest packaging lp:glotofacil debian2
 
+---------------
+REFERENCE:
+https://wiki.freepascal.org/Publish_project_on_Launchpad
 
