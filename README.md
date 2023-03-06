@@ -15,6 +15,10 @@ Disponível na seção de releases, ou via PPA através dos comandos abaixo:
     sudo apt-get update
     sudo apt-get install glotofacil
 
+## Base de dados inicial
+
+Caso deseje agilizar a atualização da base, baixe [aqui](https://github.com/amaurycarvalho/GLotofacil/blob/main/base/base.zip) o arquivo e use o botão "Importar de arquivo" para carregá-lo no sistema.
+
 ## Suporte ao projeto
 
 Ajude esse projeto adquirindo o ebook abaixo na Amazon:

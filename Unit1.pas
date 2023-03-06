@@ -497,10 +497,6 @@ var
   sFile: string;
   oOpen: TOpenDialog;
   i: integer;
-
-{var i1, i2, i3, i4, i5, i6, i7, i8, i9 : integer;
-    i10, i11, i12, i13, i14, i15 : integer;
-    ncsn : integer;}
 begin
 
   oOpen := TOpenDialog.Create(nil);
@@ -509,7 +505,7 @@ begin
     'Importando de um arquivo já baixado do portal da Caixa...';
   Application.ProcessMessages;
 
-  oOpen.Filter := 'Arquivo de sorteios da Caixa|*.zip';
+  oOpen.Filter := 'Base compactada (*.zip)|*.zip|Base descompactada (*.csv)|*.csv|Base da página da Caixa (*.html)|*.html';
   oOpen.Title := 'Abrir arquivo de sorteios da Caixa';
 
   if not oOpen.Execute then
@@ -544,39 +540,6 @@ begin
   end;
 
   oOpen.Free;
-
-    {
-    button3.Enabled := true;
-    stop := false;
-
-    ncsn := 0;
-    pb1.max := csn.icombineTotal;
-
-    for i1 := 1 to 11 do
-    for i2 := i1+1 to 12 do
-    for i3 := i2+1 to 13 do
-    for i4 := i3+1 to 14 do
-    for i5 := i4+1 to 15 do
-    for i6 := i5+1 to 16 do
-    for i7 := i6+1 to 17 do
-    for i8 := i7+1 to 18 do
-    for i9 := i8+1 to 19 do
-    for i10 := i9+1 to 20 do
-    for i11 := i10+1 to 21 do
-    for i12 := i11+1 to 22 do
-    for i13 := i12+1 to 23 do
-    for i14 := i13+1 to 24 do
-    for i15 := i14+1 to 25 do
-    begin
-        ncsn := ncsn + 1;
-        pb1.Position := ncsn;
-        if stop then
-            exit;
-        application.ProcessMessages;
-    end;
-
-    ShowMessage('Total = ' + IntToStr(ncsn));
-                         }
 
 end;
 

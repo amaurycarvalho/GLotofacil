@@ -9,7 +9,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls,
-  Graphics, Dialogs, ComCtrls, Menus, Grids, ExtCtrls, StdCtrls, MaskEdit,
+  Graphics, Dialogs, ComCtrls, Menus, Grids, ExtCtrls, MaskEdit,
   Process, LotoIni, CSN, Clipbrd, LCLIntf, fphttpclient, Zipper,
   sax_html, dom_html, dom, fpjson, jsonparser, opensslsockets;
 
@@ -77,6 +77,9 @@ type
     function ImportFromInternet(sb: TStatusBar): boolean;
     function ImportFromInternetFile(): boolean;
     function ImportFromLocalFile(sFile: string): boolean;
+    function ImportFromLocalFileZIP(sFile: string): boolean;
+    function ImportFromLocalFileCSV(sFile: string): boolean;
+    function ImportFromLocalFileHTML(sFile: string): boolean;
     function RefreshGrid(sgGrid: TStringGrid): boolean;
     procedure RefreshTotals(sLines: TStrings);
 
@@ -149,9 +152,11 @@ var
   sFileData: string;
   sCSV, sLine: TStringList;
   lastLocalNumber, currNumber, lastRemoteNumber: integer;
+  downloadCount: integer;
 begin
 
-  stop := false;
+  stop := False;
+  downloadCount := 0;
 
   sb.SimpleText := 'Conectando ao portal da Caixa Economica Federal...';
   Application.ProcessMessages;
@@ -164,6 +169,7 @@ begin
   oHttp := TFPHttpClient.Create(nil);
 
   try
+
     try
 
       oHttp.AllowRedirect := True;
@@ -186,6 +192,11 @@ begin
         sRemoteNumber := oJson.numero;
         lastRemoteNumber := StrToInt(oJson.numero);
 
+      finally
+        oJson.Free;
+      end;
+
+      try
         try
           sCSV := TStringList.Create;
           sCSV.Delimiter := ';';
@@ -219,19 +230,26 @@ begin
             Application.ProcessMessages;
 
             sResult := oHttp.SimpleGet(sUrl + '/' + sCurrNumber);
-            oJson := TJsonLF.Create(sResult);
-            if not oJson.tipoJogo.Equals('LOTOFACIL') then
-            begin
-              errorMessage := 'Erro na leitura do sorteio número: ' + sCurrNumber;
-              Result := False;
-              exit;
+
+            try
+              oJson := TJsonLF.Create(sResult);
+              if not oJson.tipoJogo.Equals('LOTOFACIL') then
+              begin
+                errorMessage := 'Erro na leitura do sorteio número: ' + sCurrNumber;
+                Result := False;
+                exit;
+              end;
+              sNewLine := sCurrNumber + ';' + oJson.dataApuracao +
+                ';' + oJson.dezenasSorteadasOrdemSorteio;
+              sCSV.Add(sNewLine);
+              downloadCount += 1;
+            finally
+              oJson.Free;
             end;
-            sNewLine := sCurrNumber + ';' + oJson.dataApuracao + ';' +
-              oJson.dezenasSorteadasOrdemSorteio;
-            sCSV.Add(sNewLine);
+
             Application.ProcessMessages;
             if stop then
-               break;
+              break;
           end;
 
           if FileExists(sFileData) then
@@ -241,22 +259,35 @@ begin
 
           Result := True;
 
-        finally
-          sCSV.Free;
+        except
+          on E: Exception do
+          begin
+            if (downloadCount > 0) then
+            begin
+              if FileExists(sFileData) then
+                DeleteFile(sFileData);
+
+              sCSV.SaveToFile(sFileData);
+            end;
+            errorMessage := 'Erro na tentativa de download direto: ' +
+              sLineBreak + E.Message;
+            Result := False;
+          end;
         end;
 
-      except
-        on E: Exception do
-        begin
-          errorMessage := 'Erro na tentativa de download direto: ' +
-            sLineBreak + E.Message;
-          Result := False;
-        end;
+      finally
+        sCSV.Free;
       end;
 
-    finally
-      oJson.Free;
+    except
+      on E: Exception do
+      begin
+        errorMessage := 'Erro na tentativa de download direto: ' +
+          sLineBreak + E.Message;
+        Result := False;
+      end;
     end;
+
   finally
     oIni.Free;
     oHttp.Free;
@@ -328,31 +359,49 @@ end;
 
 function TLotoModel.ImportFromLocalFile(sFile: string): boolean;
 var
-  sFileUnzipped, sFileData, sTmpPath, sImportFileName: string;
-  oUnZipper: TUnZipper;
-  oIni: TLotoIni;
-  docTag: thtmldocument;
-  elsTag: tdomnodelist;
-  sList, sCSV: TStringList;
-  sStream: TStringStream;
-  sHtml, sTag, sLine: string;
-  iIndex, iMax, iDezena, iSorteio: integer;
+  sExt: string;
 begin
+
   if not FileExists(sFile) then
   begin
-    errorMessage := 'Erro durante a importação dos sorteios';
+    errorMessage := 'Arquivo inexistente';
     Result := False;
-    exit;
+  end
+  else
+  begin
+
+    sExt := UpperCase(ExtractFileExt(sFile));
+
+    if (sExt.equals('.ZIP')) then
+      Result := ImportFromLocalFileZIP(sFile)
+    else if (sExt.equals('.CSV')) then
+      Result := ImportFromLocalFileCSV(sFile)
+    else if (sExt.equals('.HTML')) then
+      Result := ImportFromLocalFileHTML(sFile)
+    else
+    begin
+      errorMessage := 'Arquivo não suportado';
+      Result := False;
+    end;
+
   end;
 
-  // descompacta o arquivo dos sorteios
+end;
+
+function TLotoModel.ImportFromLocalFileZIP(sFile: string): boolean;
+var
+  sFileUnzipped, sTmpPath, sTmpPath2, sImportFileName: string;
+  oUnZipper: TUnZipper;
+  oIni: TLotoIni;
+begin
+
+  // prepara o ambiente
 
   oIni := TLotoIni.Create;
-
   sTmpPath := IncludeTrailingPathDelimiter(oIni.TempPath);
-  sImportFileName := oIni.ImportFileName;
-
-  sFileData := IncludeTrailingPathDelimiter(oIni.DataPath) + oIni.DataFileName;
+  sTmpPath2 := oIni.TempPath;
+  sImportFileName := oIni.DataFileName;
+  oIni.Free;
 
   {$if defined(windows)}
   sFileUnzipped := sTmpPath + sImportFileName;
@@ -372,11 +421,13 @@ begin
     DeleteFile(sFileUnzipped);
   {$ifend}
 
+  // descompacta o arquivo dos sorteios
+
   oUnZipper := TUnZipper.Create;
 
   try
     oUnZipper.FileName := sFile;
-    oUnZipper.OutputPath := oIni.TempPath;
+    oUnZipper.OutputPath := sTmpPath2;
 
     try
       oUnZipper.Examine;
@@ -386,7 +437,6 @@ begin
       begin
         errorMessage := 'Erro na tentativa de descompactar sorteios: ' +
           sLineBreak + E.Message;
-        oIni.Free;
         Result := False;
         exit;
       end;
@@ -395,8 +445,6 @@ begin
   finally
     oUnZipper.Free;
   end;
-
-  oIni.Free;
 
   {$if defined(windows)}
   if not FileExists(sFileUnzipped) then
@@ -422,77 +470,181 @@ begin
   end;
   {$ifend}
 
-  // converte o arquivo descompactado de HTML para CSV
+  // carrega o arquivo CSV
 
-  sCSV := TStringList.Create;
-
-  sList := TStringList.Create;
-  sList.LoadFromFile(sFileUnzipped);
-  sHtml := sList.Text;
-  sList.Free;
-
-  sStream := TStringStream.Create(sHtml);
-  readhtmlfile(docTag, sStream);
-  sStream.Free;
-
-  elsTag := docTag.GetElementsByTagName('td');
-  iMax := elsTag.Count - 1;
-
-  iDezena := 16;
-  iSorteio := 0;
-
-  for iIndex := 0 to iMax do
-  begin
-    sTag := elsTag[iIndex].TextContent;
-
-    if iDezena < 16 then
-    begin
-      sLine := sLine + ';' + sTag;
-
-      if iDezena = 15 then
-        sCSV.Add(sLine);
-
-      iDezena := iDezena + 1;
-    end;
-
-    if pos('/', sTag) > 0 then
-    begin
-      iDezena := 1;
-      iSorteio := iSorteio + 1;
-      sLine := IntToStr(iSorteio) + ';' + sTag;
-    end;
-
-  end;
-
-  // só prossegue se a quantidade de sorteios baixado for maior que
-  // a quantidade atual em memória
-
-  iSorteio := sCSV.Count;
-  if iSorteio < ballot_history_count then
-  begin
-    errorMessage := 'Importação incompleta dos sorteios';
-    Result := False;
-    exit;
-  end
-  else if iSorteio = ballot_history_count then
-  begin
-    errorMessage := 'Não há sorteios novos a importar';
-    Result := False;
-    exit;
-  end;
-
-  // salva o arquivo CSV com os dados do sorteio
-
-  if FileExists(sFileData) then
-    DeleteFile(sFileData);
-
-  sCSV.SaveToFile(sFileData);
-  sCSV.Free;
-
-  Result := True;
+  Result := ImportFromLocalFileCSV(sFileUnzipped);
 
 end;
 
+function TLotoModel.ImportFromLocalFileCSV(sFile: string): boolean;
+var
+  sFileData, sValue: string;
+  oIni: TLotoIni;
+  sCSV, sLine: TStringList;
+begin
+
+  // prepara o ambiente
+
+  oIni := TLotoIni.Create;
+  sFileData := IncludeTrailingPathDelimiter(oIni.DataPath) + oIni.DataFileName;
+  oIni.Free;
+
+  // carrega os dados
+
+  try
+    sCSV := TStringList.Create;
+    sCSV.Delimiter := ';';
+    sCSV.LoadFromFile(sFile);
+
+    try
+      try
+        sLine := TStringList.Create;
+        sLine.Delimiter := ';';
+        sLine.DelimitedText := sCSV.Strings[0];
+        sValue := sLine.Strings[0];
+
+        if ((not sValue.equals('1')) or (sLine.Count <> 17)) then
+        begin
+          errorMessage := 'Arquivo de sorteio com conteúdo inválido';
+          Result := False;
+          Exit;
+        end;
+
+      finally
+        sLine.Free;
+      end;
+
+    except
+      on E: Exception do
+      begin
+        errorMessage := 'Erro na leitura dos sorteios: ' +
+          sLineBreak + E.Message;
+        Result := False;
+        exit;
+      end;
+    end;
+
+    // salva o arquivo CSV com os dados do sorteio
+
+    if FileExists(sFileData) then
+      DeleteFile(sFileData);
+
+    sCSV.SaveToFile(sFileData);
+    Result := True;
+
+  finally
+    sCSV.Free;
+  end;
+
+end;
+
+function TLotoModel.ImportFromLocalFileHTML(sFile: string): boolean;
+var
+  sFileData: string;
+  oIni: TLotoIni;
+  docTag: thtmldocument;
+  elsTag: tdomnodelist;
+  sList, sCSV: TStringList;
+  sStream: TStringStream;
+  sHtml, sTag, sLine: string;
+  iIndex, iMax, iDezena, iSorteio: integer;
+begin
+
+  // prepara o ambiente
+
+  oIni := TLotoIni.Create;
+  sFileData := IncludeTrailingPathDelimiter(oIni.DataPath) + oIni.DataFileName;
+  oIni.Free;
+
+  // converte o arquivo descompactado de HTML para CSV
+
+  try
+    sCSV := TStringList.Create;
+    sCSV.Delimiter := ';';
+
+    try
+
+      try
+        sList := TStringList.Create;
+        sList.LoadFromFile(sFile);
+        sHtml := sList.Text;
+      finally
+        sList.Free;
+      end;
+
+      sStream := TStringStream.Create(sHtml);
+      readhtmlfile(docTag, sStream);
+      sStream.Free;
+
+      elsTag := docTag.GetElementsByTagName('td');
+      iMax := elsTag.Count - 1;
+
+      iDezena := 16;
+      iSorteio := 0;
+      sLine := '';
+
+      for iIndex := 0 to iMax do
+      begin
+        sTag := elsTag[iIndex].TextContent;
+
+        if iDezena < 16 then
+        begin
+          sLine := sLine + ';' + sTag;
+
+          if iDezena = 15 then
+            sCSV.Add(sLine);
+
+          iDezena := iDezena + 1;
+        end;
+
+        if pos('/', sTag) > 0 then
+        begin
+          iDezena := 1;
+          iSorteio := iSorteio + 1;
+          sLine := IntToStr(iSorteio) + ';' + sTag;
+        end;
+
+      end;
+
+    except
+      on E: Exception do
+      begin
+        errorMessage := 'Erro na leitura dos sorteios: ' + sLineBreak + E.Message;
+        Result := False;
+        exit;
+      end;
+    end;
+
+    // só prossegue se a quantidade de sorteios baixado for maior que
+    // a quantidade atual em memória
+
+    iSorteio := sCSV.Count;
+    if iSorteio < ballot_history_count then
+    begin
+      errorMessage := 'Importação incompleta dos sorteios';
+      Result := False;
+      exit;
+    end
+    else if iSorteio = ballot_history_count then
+    begin
+      errorMessage := 'Não há sorteios novos a importar';
+      Result := False;
+      exit;
+    end;
+
+    // salva o arquivo CSV com os dados do sorteio
+
+    if FileExists(sFileData) then
+      DeleteFile(sFileData);
+
+    sCSV.SaveToFile(sFileData);
+    Result := True;
+
+  finally
+    sCSV.Free;
+  end;
+
+end;
 
 function TLotoModel.RefreshGrid(sgGrid: TStringGrid): boolean;
 var
@@ -1075,7 +1227,7 @@ end;
 
 procedure TLotoModel.ChartHistogram(size: integer; module: double);
 var
-  i, k, y, s, f: integer;
+  i, y, s, f: integer;
   avg, min, max, std: double;
 begin
   max := oCSN.Combine(25, 15);
@@ -1283,6 +1435,7 @@ begin
 
   p_win := 15 / 25;
   np := p_win * size;
+  p := 0;
 
   if np <= 10 then
   begin
