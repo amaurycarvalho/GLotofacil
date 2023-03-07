@@ -367,6 +367,10 @@ object Form1: TForm1
       Caption = 'Copiar'
       OnClick = Copy1Click
     end
+    object MenuItem1: TMenuItem
+      Caption = 'Copiar somente os jogos'
+      OnClick = MenuItem1Click
+    end
     object Colar1: TMenuItem
       Caption = 'Colar'
       OnClick = Colar1Click

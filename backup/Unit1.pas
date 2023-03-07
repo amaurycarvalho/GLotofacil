@@ -34,6 +34,7 @@ type
     GroupBox5: TGroupBox;
     Label1: TLabel;
     Memo1: TMemo;
+    MenuItem1: TMenuItem;
     opOtimizaProp: TCheckBox;
     PageControl1: TPageControl;
     Panel2: TPanel;
@@ -72,6 +73,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
     procedure RadioButton1Click(Sender: TObject);
     procedure RadioButton2Click(Sender: TObject);
@@ -429,6 +431,28 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
 
   stop := True;
+
+end;
+
+procedure TForm1.MenuItem1Click(Sender: TObject);
+var
+  i: integer;
+  sl: TStringList;
+begin
+
+  sl := TStringList.Create;
+
+  for i := 1 to sg1.RowCount - 1 do
+  begin
+    sl.Add(sg1.Cells[1,i]);
+  end;
+
+  clipboard.Clear;
+  clipboard.AsText := sl.Text;
+
+  sl.Free;
+
+  ShowMessage('Copiado para a área de transferência');
 
 end;
 
@@ -887,7 +911,11 @@ begin
 
   s := clipboard.AsText;
 
-  if s[1] = '#' then
+  if s.IsEmpty then
+  begin
+       ShowMessage('Área de transferencia vazia');
+  end;
+  else if s[1] = '#' then
   begin
 
     sl := TStringList.Create;
@@ -911,7 +939,7 @@ begin
           a := a + s[i];
         chr(9), ',', ';', '-':
           a := a + ',';
-        chr(13):
+        chr(13), chr(10):
         begin
           if a <> '' then
           begin

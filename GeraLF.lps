@@ -8,7 +8,7 @@
         <Filename Value="GeraLF.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="3" Y="6"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="39"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
@@ -20,8 +20,9 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="32" Y="8"/>
-        <UsageCount Value="38"/>
+        <TopLine Value="449"/>
+        <CursorPos X="28" Y="452"/>
+        <UsageCount Value="39"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -31,7 +32,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="18"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="39"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
@@ -41,7 +42,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="89"/>
         <CursorPos Y="110"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
@@ -52,7 +53,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="78"/>
         <CursorPos X="27" Y="84"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
@@ -63,7 +64,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
@@ -73,7 +74,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit6>
       <Unit7>
@@ -83,7 +84,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
       <Unit8>
@@ -93,7 +94,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit8>
       <Unit9>
@@ -103,7 +104,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit9>
       <Unit10>
@@ -113,7 +114,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit10>
       <Unit11>
@@ -164,123 +165,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="429" TopLine="416"/>
+        <Caret Line="579" TopLine="571"/>
       </Position1>
       <Position2>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="430" TopLine="416"/>
+        <Caret Line="580" TopLine="571"/>
       </Position2>
       <Position3>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="432" TopLine="416"/>
+        <Caret Line="582" TopLine="571"/>
       </Position3>
       <Position4>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="433" TopLine="416"/>
+        <Caret Line="583" TopLine="571"/>
       </Position4>
       <Position5>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="434" TopLine="417"/>
+        <Caret Line="584" TopLine="571"/>
       </Position5>
       <Position6>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="446" TopLine="436"/>
+        <Caret Line="586" TopLine="577"/>
       </Position6>
       <Position7>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="457" TopLine="447"/>
+        <Caret Line="588" TopLine="580"/>
       </Position7>
       <Position8>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="575" TopLine="565"/>
+        <Caret Line="590" TopLine="580"/>
       </Position8>
       <Position9>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="576" TopLine="565"/>
+        <Caret Line="600" TopLine="592"/>
       </Position9>
       <Position10>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="577" TopLine="565"/>
+        <Caret Line="586" TopLine="576"/>
       </Position10>
       <Position11>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="579" TopLine="571"/>
+        <Caret Line="588" TopLine="582"/>
       </Position11>
       <Position12>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="580" TopLine="571"/>
+        <Caret Line="590" TopLine="582"/>
       </Position12>
       <Position13>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="582" TopLine="571"/>
+        <Caret Line="600" TopLine="586"/>
       </Position13>
       <Position14>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="583" TopLine="571"/>
+        <Caret Line="602" TopLine="589"/>
       </Position14>
       <Position15>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="584" TopLine="571"/>
+        <Caret Line="603" TopLine="589"/>
       </Position15>
       <Position16>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="586" TopLine="577"/>
+        <Caret Line="604" TopLine="589"/>
       </Position16>
       <Position17>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="588" TopLine="580"/>
+        <Caret Line="586" TopLine="576"/>
       </Position17>
       <Position18>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="590" TopLine="580"/>
+        <Caret Line="588" TopLine="576"/>
       </Position18>
       <Position19>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="600" TopLine="592"/>
+        <Caret Line="590" TopLine="576"/>
       </Position19>
       <Position20>
         <Filename Value="lotomodel.pas"/>
-        <Caret Line="586" TopLine="576"/>
+        <Caret Line="592" TopLine="582"/>
       </Position20>
       <Position21>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="588" TopLine="582"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="5" Column="24"/>
       </Position21>
       <Position22>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="590" TopLine="582"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="439" Column="3" TopLine="437"/>
       </Position22>
       <Position23>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="600" TopLine="586"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="894" Column="3" TopLine="912"/>
       </Position23>
       <Position24>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="602" TopLine="589"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="499" Column="21" TopLine="482"/>
       </Position24>
       <Position25>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="603" TopLine="589"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="444" TopLine="437"/>
       </Position25>
       <Position26>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="604" TopLine="589"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="447" Column="26" TopLine="436"/>
       </Position26>
       <Position27>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="586" TopLine="576"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="938" Column="25" TopLine="930"/>
       </Position27>
       <Position28>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="588" TopLine="576"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="916" Column="51" TopLine="910"/>
       </Position28>
       <Position29>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="590" TopLine="576"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="918" Column="7" TopLine="910"/>
       </Position29>
       <Position30>
-        <Filename Value="lotomodel.pas"/>
-        <Caret Line="592" TopLine="582"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="966" Column="23" TopLine="953"/>
       </Position30>
     </JumpHistory>
     <RunParams>
